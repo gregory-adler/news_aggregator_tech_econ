@@ -6,24 +6,8 @@ import './App.css';
 
 	const helloWorld = 'Welcome toooo the Road to learn React';
 
-	const list = [
-	  {
-	    title: 'React',
-	    url: 'https://reactjs.org/',
-	    author: 'Jordan Walke',
-	    num_comments: 3,
-	    points: 4,
-	    objectID: 0,
-	  },
-	  {
-	    title: 'Redux',
-	    url: 'https://redux.js.org/',
-	    author: 'Dan Abramov, Andrew Clark',
-	    num_comments: 2,
-	    points: 5,
-	    objectID: 1,
-	  },
-	];
+
+  let result = []
 
 
 
@@ -36,25 +20,36 @@ function isSearched(searchTerm) {
 
 class App extends Component {
 	constructor(props){
-		super(props);
-		this.state = {
-			list: list,
-			searchTerm: '',
-		};
-		 this.onDismiss = this.onDismiss.bind(this);
-		 this.onSearchChange = this.onSearchChange.bind(this);
+    super(props);
+    this.state = {
+    	result: this.getStories(),
+    	searchTerm: '',
+    };
+     this.onDismiss = this.onDismiss.bind(this);
+     this.onSearchChange = this.onSearchChange.bind(this);
+     this.getStories = this.getStories.bind(this)
+    }
 
-	}
+    getStories(){
+
+    result.push({
+      'author': 'the',
+      'title': 'aaaa'
+    })
+    return result
+  }
+
 	onDismiss(id) {
-	  const updatedList = this.state.list.filter(item => item.objectID !== id);
-	  this.setState({ list: updatedList });
+	  const updatedList = this.state.result.filter(item => item.objectID !== id);
+	  this.setState({ result: updatedList });
 	}
 
  	onSearchChange(event) {this.setState({ searchTerm: event.target.value });}
 
 
   render() {
-  	 const { searchTerm, list } = this.state;
+  	 const { searchTerm, result } = this.state;
+     if (!result) { return 1; }
     return (
     	<div className="page">
         <div className="interactions">
@@ -68,7 +63,7 @@ class App extends Component {
         </Search>
         </div>
         <Table
-	        list={list}
+	        result={result}
 	        pattern={searchTerm}
 	        onDismiss={this.onDismiss}
          />
@@ -86,12 +81,12 @@ const Search = ({ value, onChange, children }) =>
     />
   </form>
 
-const Table = ({ list, pattern, onDismiss }) =>
+const Table = ({ result, pattern, onDismiss }) =>
   <div className="table">
-    {list.filter(isSearched(pattern)).map(item =>
+    {result.map(item =>
       <div key={item.objectID} className="table-row">
         <span style={{ width: '40%' }}>
-          <a href={item.url}>{item.title}</a>
+          {item.title}
         </span>
         <span style={{ width: '30%' }}>
           {item.author}
