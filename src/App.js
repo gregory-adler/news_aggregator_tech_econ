@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 
 
 	const helloWorld = 'Welcome toooo the Road to learn React';
-
-
-  let result = []
 
 
 
@@ -17,26 +13,26 @@ function isSearched(searchTerm) {
   }
 }
 
+let result = []
+
+let api = 'https://newsapi.org/v2/everything?q=bitcoin&from=2019-04-09&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43'
 
 class App extends Component {
 	constructor(props){
     super(props);
     this.state = {
-    	result: this.getStories(),
+    	result: [],
     	searchTerm: '',
     };
      this.onDismiss = this.onDismiss.bind(this);
      this.onSearchChange = this.onSearchChange.bind(this);
-     this.getStories = this.getStories.bind(this)
     }
 
-    getStories(){
+     componentDidMount() {
+    // fetch data and update state
+    // fetch(api).then(response => this.setState({ result: [1,1,1,1]})).catch();
+    fetch(api).then(response => response = response.json()).then(response => this.setState({result: response.articles})).catch();
 
-    result.push({
-      'author': 'the',
-      'title': 'aaaa'
-    })
-    return result
   }
 
 	onDismiss(id) {
@@ -49,6 +45,8 @@ class App extends Component {
 
   render() {
   	 const { searchTerm, result } = this.state;
+
+     console.log(result)
      if (!result) { return 1; }
     return (
     	<div className="page">
@@ -92,10 +90,10 @@ const Table = ({ result, pattern, onDismiss }) =>
           {item.author}
         </span>
         <span style={{ width: '10%' }}>
-          {item.num_comments}
+          {item.url}
         </span>
         <span style={{ width: '10%' }}>
-          {item.points}
+          {item.publishedAt}
         </span>
         <span style={{ width: '10%' }}>
           <Button
