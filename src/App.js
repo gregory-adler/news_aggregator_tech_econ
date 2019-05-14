@@ -90,7 +90,7 @@ const Search = ({ value, onChange, children }) =>
 
 const Table = ({ result, pattern, onDismiss }) =>
   <div className="table">
-    {result.map(item =>
+    {result.filter(isSearched(pattern)).map(item =>
       <div key={item.objectID} className="table-row">
         <span style={{ width: '35%' }}>
           {item.title}
