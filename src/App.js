@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-
-	const helloWorld = 'Welcome toooo the Road to learn React';
-
+const helloWorld = 'News Aggregation';
+const categories = 'Technology / Econ';
+const test = new Date()
+var day = test.getDate()
 
 
 function isSearched(searchTerm) {
@@ -15,12 +16,12 @@ function isSearched(searchTerm) {
 
 let result = []
 
-let api = 'https://newsapi.org/v2/everything?q=bitcoin&from=2019-04-09&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43'
+let api = 'https://newsapi.org/v2/everything?q=technology or Econ&from=2019-04-14${day}&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43'
 
 class App extends Component {
 	constructor(props){
-    super(props);
-    this.state = {
+     super(props);
+     this.state = {
     	result: [],
     	searchTerm: '',
     };
@@ -31,9 +32,15 @@ class App extends Component {
      componentDidMount() {
     // fetch data and update state
     // fetch(api).then(response => this.setState({ result: [1,1,1,1]})).catch();
-    fetch(api).then(response => response = response.json()).then(response => this.setState({result: response.articles})).catch();
+    fetch(api).then(response => response = response.json()).then(response => {
 
-  }
+          console.log(response.articles.length)
+          for (let i = 0; i< response.articles.length; i++){
+               response.articles[i]["objectID"]= i; 
+           }
+           this.setState({result: response.articles})
+          }).catch()
+     }
 
 	onDismiss(id) {
 	  const updatedList = this.state.result.filter(item => item.objectID !== id);
@@ -53,6 +60,7 @@ class App extends Component {
         <div className="interactions">
     <div className="App">
     	<h2> {helloWorld}</h2>
+      <h3> {categories}</h3>
     	 <Search
           value={searchTerm}
           onChange={this.onSearchChange}
@@ -66,6 +74,7 @@ class App extends Component {
 	        onDismiss={this.onDismiss}
          />
     </div>
+    <p> <i> *Built on: React JavaScript / News API </i></p>
     </div>
     );
 }}
@@ -83,16 +92,16 @@ const Table = ({ result, pattern, onDismiss }) =>
   <div className="table">
     {result.map(item =>
       <div key={item.objectID} className="table-row">
-        <span style={{ width: '40%' }}>
+        <span style={{ width: '35%' }}>
           {item.title}
         </span>
-        <span style={{ width: '30%' }}>
+        <span style={{ width: '25%' }}>
           {item.author}
         </span>
-        <span style={{ width: '10%' }}>
+        <span style={{ width: '15%' }}>
           {item.url}
         </span>
-        <span style={{ width: '10%' }}>
+        <span style={{ width: '6%' }}>
           {item.publishedAt}
         </span>
         <span style={{ width: '10%' }}>
