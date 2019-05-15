@@ -101,7 +101,7 @@ const Table = ({ result, pattern, onDismiss }) =>
         <span style={{ width: '5%' }}>
         </span>
         <span style={{ width: '20%' }}>
-          <a href = '{item.url}'> {item.url} </a>
+          <a href = {item.url}> {item.url} </a>
         </span>
         <span style={{ width: '15%' }}>
           {item.publishedAt.slice(5,10)}
