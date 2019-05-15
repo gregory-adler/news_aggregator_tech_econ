@@ -6,6 +6,9 @@ const helloWorld = 'News Aggregation';
 const categories = 'Technology / Econ';
 const test = new Date()
 var day = test.getDate()
+let result = []
+let api = 'https://newsapi.org/v2/everything?q=technology or Econ&from=2019-04-14${day}&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43'
+
 
 
 function isSearched(searchTerm) {
@@ -14,9 +17,6 @@ function isSearched(searchTerm) {
   }
 }
 
-let result = []
-
-let api = 'https://newsapi.org/v2/everything?q=technology or Econ&from=2019-04-14${day}&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43'
 
 class App extends Component {
 	constructor(props){
@@ -92,17 +92,19 @@ const Table = ({ result, pattern, onDismiss }) =>
   <div className="table">
     {result.filter(isSearched(pattern)).map(item =>
       <div key={item.objectID} className="table-row">
-        <span style={{ width: '35%' }}>
+        <span style={{ width: '25%' }}>
           {item.title}
         </span>
-        <span style={{ width: '25%' }}>
+        <span style={{ width: '20%' }}>
           {item.author}
         </span>
-        <span style={{ width: '15%' }}>
-          {item.url}
+        <span style={{ width: '5%' }}>
         </span>
-        <span style={{ width: '6%' }}>
-          {item.publishedAt}
+        <span style={{ width: '20%' }}>
+          <a href = '{item.url}'> {item.url} </a>
+        </span>
+        <span style={{ width: '15%' }}>
+          {item.publishedAt.slice(5,10)}
         </span>
         <span style={{ width: '10%' }}>
           <Button
