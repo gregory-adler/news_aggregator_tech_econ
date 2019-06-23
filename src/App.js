@@ -10,6 +10,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import './App.css';
+import HttpsRedirect from 'react-https-redirect';
 
 const helloWorld = 'News Aggregation';
 const categories = 'Technology / Econ';
@@ -69,6 +70,7 @@ class App extends Component {
     }
     return (
       // eslint-disable-next-line react/jsx-filename-extension
+      <HttpsRedirect>
       <div className="page">
         <div className="interactions">
           <div className="App">
@@ -85,6 +87,7 @@ class App extends Component {
           <i> *Built on: React JavaScript / News API </i>
         </p>
       </div>
+      </HttpsRedirect>
     );
   }
 }
