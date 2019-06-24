@@ -12,13 +12,12 @@ import React, { Component } from 'react';
 import './App.css';
 import HttpsRedirect from 'react-https-redirect';
 
-const helloWorld = 'News Aggregation';
-const categories = 'Technology / Econ';
+const helloWorld = 'Daily News Reading';
 const date = new Date();
 // eslint-disable-next-line no-unused-vars
 const day = date.getDate();
 const api =
-  'https://newsapi.org/v2/everything?q=technology or Econ&from=2019-04-14${day}&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43';
+  'https://newsapi.org/v2/top-headlines?country=us&from=2019-04-14${day}&sortBy=publishedAt&apiKey=5bf49b2702f54576bab85424a9278e43';
 
 function isSearched(searchTerm) {
   return function(item) {
@@ -75,7 +74,6 @@ class App extends Component {
         <div className="interactions">
           <div className="App">
             <h2> {helloWorld} </h2>
-            <h3> {categories} </h3>
             <Search value={searchTerm} onChange={this.onSearchChange}>
               Search
             </Search>
@@ -106,10 +104,10 @@ const Table = ({ result, pattern, onDismiss }) => (
   <div className="table">
     {result.filter(isSearched(pattern)).map(item => (
       <div key={item.objectID} className="table-row">
-        <span style={{ width: '25%' }}>{item.title}</span>
+        <span style={{ width: '28%' }}>{item.title}</span>
         <span style={{ width: '20%' }}>{item.author}</span>
         <span style={{ width: '5%' }} />
-        <span style={{ width: '20%' }}>
+        <span style={{ width: '15%' }}>
           <a href={item.url}> {item.url} </a>
         </span>
         <span style={{ width: '15%' }}>{item.publishedAt.slice(5, 10)}</span>
