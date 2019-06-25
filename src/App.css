@@ -17,6 +17,9 @@
   padding: 0 10px;
   justify-content: space-between;
 }
+a {
+  color: #0000ff;
+}
 
 .table-empty {
   margin: 200px;
