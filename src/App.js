@@ -42,9 +42,10 @@ class App extends Component {
 			.then(response => (response = response.json()))
 			.then(response => {
 				console.log(response.articles.length);
+				response.articles = response.articles.filter(function(article) {return article.author != null && article.author != "" });
 				// eslint-disable-next-line no-plusplus
 				for (let i = 0; i < response.articles.length; i++) {
-					response.articles[i].objectID = i;
+						response.articles[i].objectID = i;
 				}
 				this.setState({ result: response.articles });
 			})
@@ -104,10 +105,11 @@ const Table = ({ result, pattern, onDismiss }) => (
 	<div className="table">
 		{result.filter(isSearched(pattern)).map(item => (
 			<div key={item.objectID} className="table-row">
-				<span style={{ width: '28%' }}>{item.title}</span>
-				<span style={{ width: '20%' }}>{item.author}</span>
+				<span style={{ width: '35%' }}>{item.title}</span>
+				<span style={{ width: '2.5%' }}></span>
+				<span style={{ width: '15%' }}>{item.author}</span>
 				<span style={{ width: '5%' }} />
-				<span style={{ width: '15%' }}>
+				<span style={{ width: '12.5%' }}>
 					<a href={item.url}> {item.url} </a>
 				</span>
 				<span style={{ width: '15%' }}>{item.publishedAt.slice(5, 10)}</span>
