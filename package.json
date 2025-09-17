@@ -13,7 +13,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-https-redirect": "^1.1.0",
-    "react-scripts": "^3.0.0",
+    "react-scripts": "^5.0.1",
     "start": "^5.1.0",
     "typescript": "^3.4.5"
   },
